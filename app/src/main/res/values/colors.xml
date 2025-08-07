@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="grapefruit_red">#FF6F61</color>
+    <color name="grapefruit_orange">#FFA07A</color>
+    <color name="milk_white">#FDFDFC</color>
+    <color name="dark_grey">#423B3B</color>
+    <color name="text_grey">#BBBBBB</color>
+    <color name="accent_green">#507E5F</color>
+
+</resources>

@@ -1,0 +1,37 @@
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# IDE files
+.idea/
+*.iml
+.gradle/
+local.properties
+
+# Build folders
+/build/
+*/build/
+
+# Firebase/Google
+google-services.json
+*.keystore
+secret.properties
+
+# Logs
+*.log
+
+# Kotlin/Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Gradle
+.gradle/
+**/build/
+**/out/
+
+# Android Studio Navigation
+.navigation/
+
