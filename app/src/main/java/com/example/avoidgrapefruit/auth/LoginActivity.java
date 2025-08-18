@@ -43,8 +43,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
-        googleAuth = new GoogleAuth(this);
 
+        googleAuth = new GoogleAuth(this);
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         // Initialize views
         editEmail = findViewById(R.id.enterLogin);
         editPassword = findViewById(R.id.enterPassword);
@@ -69,10 +70,13 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
+                    Log.d("Google Sign-In result received", result.toString());
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         GoogleSignInAccount account = googleAuth.getAccountFromIntent(result.getData());
+                        Log.d("Account: ", account.toString());
                         if (account != null) {
                             firebaseAuthWithGoogle(account.getIdToken());
+
                         } else {
                             Toast.makeText(this, "Google sign-in failed", Toast.LENGTH_SHORT).show();
                         }
@@ -137,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         progressBar.setVisibility(View.VISIBLE);
+        Log.d("ID Token: " , idToken);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
