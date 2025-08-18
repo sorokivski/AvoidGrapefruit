@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fab_add_drug" type="id" />
+    <item name="recycler_drugs" type="id" />
+    <item name="section_title" type="id" />
+    <item name="user_name" type="id" />
+</resources>
