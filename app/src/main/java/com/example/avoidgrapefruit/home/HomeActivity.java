@@ -15,8 +15,12 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 import com.example.avoidgrapefruit.auth.GoogleAuth;
 import com.example.avoidgrapefruit.auth.LoginActivity;
+// It seems ProductActivity is not imported.
+// import com.example.avoidgrapefruit.ProductActivity; // Assuming ProductActivity is in this package
+import com.example.avoidgrapefruit.products.ProductActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
@@ -40,7 +44,20 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(v -> logoutUser());
+
+        // Assuming you have a Button with the ID btnGoToProducts in your activity_home.xml layout
+        Button btnGoToProducts = findViewById(R.id.btnGoToProducts);
+        btnGoToProducts.setOnClickListener(v -> {
+            // Make sure ProductActivity is correctly imported or use the fully qualified name
+            // Intent intent = new Intent(HomeActivity.this, com.example.avoidgrapefruit.ProductActivity.class);
+            // For now, I'll assume it's in the same package or imported.
+            // If ProductActivity is in a different package, ensure it's imported correctly.
+            // For example: import com.example.avoidgrapefruit.product.ProductActivity;
+            Intent intent = new Intent(HomeActivity.this, ProductActivity.class);
+            startActivity(intent);
+        });
     }
+
 
     private void logoutUser() {
         // Sign out from Firebase directly
@@ -59,3 +76,4 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 }
+
