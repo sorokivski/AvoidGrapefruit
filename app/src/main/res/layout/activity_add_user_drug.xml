@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ImageButton
+    android:id="@+id/btnBack"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:contentDescription="Go Back"
+    android:src="@drawable/ic_arrow_back" />
+
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/etDrugName"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Drug name" />
+
+        <EditText
+            android:id="@+id/etDosage"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Dosage" />
+
+        <EditText
+            android:id="@+id/etStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Start Date" />
+
+        <EditText
+            android:id="@+id/etEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="End Date" />
+
+        <EditText
+            android:id="@+id/etAmountPerDay"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Amount per day"
+            android:inputType="number" />
+
+        <!-- Intake times checkboxes -->
+        <TextView
+            android:text="Select Intake Times"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+
+        <CheckBox
+            android:id="@+id/cbMorning"
+            android:text="Morning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <CheckBox
+            android:id="@+id/cbAfternoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Afternoon" />
+
+        <CheckBox
+            android:id="@+id/cbEvening"
+            android:text="Evening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Switch
+            android:id="@+id/switchActive"
+            android:layout_width="138dp"
+            android:layout_height="57dp"
+            android:checked="true"
+            android:text="Active" />
+
+        <Button
+            android:id="@+id/btnSaveDrug"
+            android:text="Save Drug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</ScrollView>
+
+</RelativeLayout>

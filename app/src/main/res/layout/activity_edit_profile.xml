@@ -17,6 +17,7 @@
         android:fillViewport="true"
         android:padding="16dp">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -145,4 +146,17 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Go Back"
+        android:src="@drawable/ic_arrow_back"
+        android:elevation="8dp"
+        android:padding="10dp" />
+
 </RelativeLayout>

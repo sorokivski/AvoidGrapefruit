@@ -29,6 +29,14 @@
         <activity
             android:name=".user.EditProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".user_drugs.AddUserDrugActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user_drugs.EditUserDrugActivity"
+            android:exported="false" />
+        <activity android:name=".user_drugs.UserDrugInfoActivity"
+            android:exported="false" />
 
 
         <activity

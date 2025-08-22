@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDrug {
+    private String uuid;
     private String drugId;
     private String drugName;
     private Date startDate;
@@ -18,7 +19,6 @@ public class UserDrug {
     private String dosage;
     private int amountPerDay;
     private boolean active;
-
     public enum IntakeTime {
         MORNING,
         AFTERNOON,
@@ -26,19 +26,7 @@ public class UserDrug {
     }
 
     private List<IntakeTime> intakeTimes;
-//    public List<DrugIntake> generateSchedule() {
-//        List<DrugIntake> schedule = new ArrayList<>();
-//        LocalDate current = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//
-//        while (!current.isAfter(end)) {
-//            for (IntakeTime time : intakeTimes) {
-//                schedule.add(new DrugIntake(drugId, current, time, false, null));
-//            }
-//            current = current.plusDays(1);
-//        }
-//        return schedule;
-//    }
+
 
 
 }

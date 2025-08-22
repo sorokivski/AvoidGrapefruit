@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- User Drug Info Section -->
+        <TextView
+            android:id="@+id/tvDrugName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/grapefruit_red"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tvDosage"
+            android:textColor="@color/dark_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tvDates"
+            android:textColor="@color/dark_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvAmountPerDay"
+            android:textColor="@color/grapefruit_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvActiveStatus"
+            android:textColor="@color/accent_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Intake Times -->
+        <TextView
+            android:text="Intake Times"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/wood_brown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/intakeTimesContainer"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Global Drug Info Section (conditionally visible) -->
+        <ScrollView
+            android:id="@+id/globalDrugScroll"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <!-- Expandable Sections -->
+                <include
+                    android:id="@+id/sectionDescription"
+                    layout="@layout/expandable_section" />
+
+                <include
+                    android:id="@+id/sectionDosage"
+                    layout="@layout/expandable_section" />
+
+                <include
+                    android:id="@+id/sectionMealTiming"
+                    layout="@layout/expandable_section" />
+
+
+                <include
+                    android:id="@+id/sectionPrecautions"
+                    layout="@layout/expandable_section" />
+
+                <!-- Tags -->
+                <TextView
+                    android:text="Tags"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"/>
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupTags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleLine="false"
+                    app:singleSelection="false"
+                    app:chipSpacing="8dp"
+                    app:lineSpacing="8dp"/>
+
+                <!-- Brand Names -->
+                <TextView
+                    android:text="Brand Names"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                   />
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupBrands"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleLine="false"
+                    app:singleSelection="false"
+                    app:chipSpacing="8dp"
+                    app:lineSpacing="8dp"/>
+
+                <!-- Synonyms -->
+                <TextView
+                    android:text="Synonyms"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    />
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupSynonyms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="false"
+                    app:chipSpacing="8dp"
+                    app:lineSpacing="8dp"/>
+            </LinearLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Go Back"
+        android:src="@drawable/ic_arrow_back"
+        android:elevation="8dp"
+        android:padding="10dp" />
+
+
+</RelativeLayout>

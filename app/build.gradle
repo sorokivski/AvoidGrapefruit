@@ -46,24 +46,26 @@ dependencies {
     implementation libs.androidx.ui.graphics
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.material3
-    implementation(platform("com.google.firebase:firebase-bom:34.0.0"))
+    implementation(platform(libs.firebase.bom))
     implementation libs.firebase.auth.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.androidx.activity
     implementation libs.androidx.constraintlayout
-    implementation 'com.google.android.gms:play-services-auth:21.0.0'
-    implementation 'com.google.firebase:firebase-firestore:24.9.1'
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-firestore'
-    compileOnly 'org.projectlombok:lombok:1.18.38'
-    annotationProcessor 'org.projectlombok:lombok:1.18.38'
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
-    implementation platform('com.google.firebase:firebase-bom:32.7.0')
-    implementation 'com.google.firebase:firebase-storage'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation libs.play.services.auth
+    implementation libs.firebase.firestore
+    implementation libs.firebase.auth
+    implementation libs.google.firebase.firestore
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    implementation libs.glide
+    annotationProcessor libs.compiler
+    implementation platform(libs.firebase.bom.v3270)
+    implementation libs.firebase.storage
+    implementation libs.circleimageview
+    implementation libs.material.v1110
+    implementation libs.recyclerview.swipedecorator
+    implementation libs.flexbox
 
 
     testImplementation libs.junit

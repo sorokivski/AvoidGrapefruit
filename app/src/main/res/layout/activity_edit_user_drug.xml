@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_google_button"
+        android:layout_marginTop="72dp"
+        android:padding="20dp">
+
+        <!-- Drug Name (visible only if uid == drugId) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutDrugName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Drug Name"
+            android:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDrugName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Dosage -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dosage">
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Amount per day -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDosage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Amount per day">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmountPerDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Start Date -->
+        <TextView
+            android:id="@+id/tvStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Date: "
+            android:padding="8dp"/>
+
+        <!-- End Date -->
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Date: "
+            android:padding="8dp"/>
+
+        <!-- Intake Times -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupIntakeTimes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="false">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMorning"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="Morning"
+                android:checkable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAfternoon"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="Afternoon"
+                android:checkable="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipEvening"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="Evening"
+                android:checkable="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Active -->
+        <CheckBox
+            android:id="@+id/checkActive"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:text="Active" />
+
+        <!-- Save button -->
+        <Button
+            android:id="@+id/btnSaveDrug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Save"/>
+    </LinearLayout>
+</ScrollView>
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Go Back"
+        android:src="@drawable/ic_arrow_back"
+        android:elevation="8dp"
+        android:padding="10dp" />
+</RelativeLayout>

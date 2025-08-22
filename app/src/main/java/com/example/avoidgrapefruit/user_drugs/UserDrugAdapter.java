@@ -1,9 +1,8 @@
-package com.example.avoidgrapefruit.user;
+package com.example.avoidgrapefruit.user_drugs;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,12 +21,6 @@ public class UserDrugAdapter extends RecyclerView.Adapter<UserDrugAdapter.DrugVi
 
     public interface OnDrugClickListener {
         void onCardClick(UserDrug drug);
-
-        void onNameClick(UserDrug drug);
-
-        void onEditClick(UserDrug drug);
-
-        void onDeleteClick(UserDrug drug);
     }
 
     private List<UserDrug> drugs = new ArrayList<>();
@@ -61,6 +54,10 @@ public class UserDrugAdapter extends RecyclerView.Adapter<UserDrugAdapter.DrugVi
         notifyDataSetChanged();
     }
 
+    public UserDrug getDrugAt(int position) {
+        return drugs.get(position);
+    }
+
     public void removeDrug(UserDrug drug) {
         int index = drugs.indexOf(drug);
         if (index != -1) {
@@ -71,14 +68,12 @@ public class UserDrugAdapter extends RecyclerView.Adapter<UserDrugAdapter.DrugVi
 
     static class DrugViewHolder extends RecyclerView.ViewHolder {
         TextView tvDrugName, tvDosage, tvDates;
-        ImageButton btnMenu;
 
         public DrugViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDrugName = itemView.findViewById(R.id.drug_name);
             tvDosage = itemView.findViewById(R.id.drug_dosage);
             tvDates = itemView.findViewById(R.id.drug_intake_times);
-            btnMenu = itemView.findViewById(R.id.btnMoreOptions);
 
         }
 
@@ -90,25 +85,6 @@ public class UserDrugAdapter extends RecyclerView.Adapter<UserDrugAdapter.DrugVi
             // Card click
             itemView.setOnClickListener(v -> listener.onCardClick(drug));
 
-            // Drug name click
-            tvDrugName.setOnClickListener(v -> listener.onNameClick(drug));
-
-            // Menu click (edit / delete)
-//            btnMenu.setOnClickListener(v -> {
-//                PopupMenu menu = new PopupMenu(itemView.getContext(), btnMenu);
-//                menu.inflate(R.menu.menu_user_drug_item);
-//                menu.setOnMenuItemClickListener(item -> {
-//                    if (item.getItemId() == R.id.action_edit) {
-//                        listener.onEditClick(drug);
-//                        return true;
-//                    } else if (item.getItemId() == R.id.action_delete) {
-//                        listener.onDeleteClick(drug);
-//                        return true;
-//                    }
-//                    return false;
-//                });
-            //    menu.show();
-            //  });
         }
 
         private String formatDate(Date date) {

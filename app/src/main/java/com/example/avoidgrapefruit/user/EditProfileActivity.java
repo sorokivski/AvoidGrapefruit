@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private Uri selectedImageUri;
     private String userId;
     private String userEmail;
-    private User.Gender selectedGender = null;
 
     private AuthManager authManager;
     private ActivityResultLauncher<Intent> pickImageLauncher;
@@ -71,6 +71,9 @@ public class EditProfileActivity extends AppCompatActivity {
         etMedical = findViewById(R.id.etMedicalConditions);
         etAllergies = findViewById(R.id.etAllergies);
         btnSave = findViewById(R.id.btnSaveProfile);
+        ImageButton btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
+
 
         tvEmail.setText(userEmail);
 
@@ -147,7 +150,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String allergies = etAllergies.getText() != null ? etAllergies.getText().toString().trim() : "";
 
         int checkedId = genderChipGroup.getCheckedChipId();
-        selectedGender = (checkedId == R.id.chipMale) ? User.Gender.MALE :
+        User.Gender selectedGender = (checkedId == R.id.chipMale) ? User.Gender.MALE :
                 (checkedId == R.id.chipFemale) ? User.Gender.FEMALE : null;
 
         if (username.isEmpty() || ageStr.isEmpty() || selectedGender == null) {

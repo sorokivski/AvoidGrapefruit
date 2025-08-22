@@ -9,10 +9,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import lombok.Getter;
+
 public class AuthManager {
 
     private static AuthManager instance;
     private final FirebaseAuth firebaseAuth;
+    @Getter
     private final FirebaseFirestore firestore;
     private GoogleAuth googleAuth; // optional, init only if needed
 
@@ -67,7 +70,4 @@ public class AuthManager {
         return googleAuth;
     }
 
-    public FirebaseFirestore getFirestore() {
-        return firestore;
-    }
 }
