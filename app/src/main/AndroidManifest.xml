@@ -49,6 +49,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".auth.VerifyEmailActivity"
+            android:exported="true">
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="avoid-grapefruit.firebaseapp.com"
+                    android:pathPrefix="/__/auth/callback" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

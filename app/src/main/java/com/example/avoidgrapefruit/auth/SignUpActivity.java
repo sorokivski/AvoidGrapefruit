@@ -96,33 +96,23 @@ public class SignUpActivity extends AppCompatActivity {
 
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
-                        progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             if (user != null) {
-                                user.sendEmailVerification()
-                                        .addOnCompleteListener(verifyTask -> {
-                                            if (verifyTask.isSuccessful()) {
-                                                Toast.makeText(this,
-                                                        "Verification email sent. Please check your inbox.",
-                                                        Toast.LENGTH_LONG).show();
-                                                firebaseAuth.signOut();
-                                                Intent intent = new Intent(this, VerifyEmailActivity.class);
-                                                intent.putExtra("email", email);
-                                                startActivity(intent);
-                                                finish();
-                                            } else {
-                                                Toast.makeText(this,
-                                                        "Failed to send verification email: " +
-                                                                verifyTask.getException().getMessage(),
-                                                        Toast.LENGTH_LONG).show();
-                                            }
-                                        });
+                                user.sendEmailVerification().addOnCompleteListener(verifyTask -> {
+                                    if (verifyTask.isSuccessful()) {
+                                        getSharedPreferences("APP_PREFS", MODE_PRIVATE)
+                                                .edit()
+                                                .putString("pendingEmail", email)
+                                                .apply();
+
+                                        Intent intent = new Intent(this, VerifyEmailActivity.class);
+                                        intent.putExtra("email", email); // pass email forward
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
                             }
-                        } else {
-                            Toast.makeText(this,
-                                    "Sign up failed: " + task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
                         }
                     });
         });
