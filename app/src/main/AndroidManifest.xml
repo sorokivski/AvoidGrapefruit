@@ -37,6 +37,8 @@
             android:exported="false" />
         <activity android:name=".user_drugs.UserDrugInfoActivity"
             android:exported="false" />
+        <activity android:name=".interactions.InteractionsActivity"
+            android:exported="false" />
 
 
         <activity

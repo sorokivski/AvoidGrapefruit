@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.auth.AuthManager;
+import com.example.avoidgrapefruit.interactions.InteractionsActivity;
 import com.example.avoidgrapefruit.user.UserProfileActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -57,7 +58,9 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btnLogout = findViewById(R.id.btnLogout);
         Button btnProfile = findViewById(R.id.btnProfile);
+        Button btnInteractions = findViewById(R.id.btnInteractions);
         btnProfile.setOnClickListener(v -> startActivity(new Intent(this, UserProfileActivity.class)));
         btnLogout.setOnClickListener(v -> authManager.logout(this));
+        btnInteractions.setOnClickListener(v -> startActivity(new Intent (this, InteractionsActivity.class)));
     }
 }
