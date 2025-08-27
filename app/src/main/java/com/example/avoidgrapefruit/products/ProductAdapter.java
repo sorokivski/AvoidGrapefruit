@@ -11,20 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avoidgrapefruit.R;
+import com.example.avoidgrapefruit.interfaces.DisplayableItem;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private Context context;
-    private List<ProductEntity> productList;
+    private List<DisplayableItem> itemList;
 
-    public ProductAdapter(Context context, List<ProductEntity> productList) {
+    public ProductAdapter(Context context, List<DisplayableItem> itemList) {
         this.context = context;
-        this.productList = productList;
+        this.itemList = itemList;
     }
 
-    public void updateList(List<ProductEntity> newList) {
-        this.productList = newList;
+    public void updateList(List<DisplayableItem> newList) {
+        this.itemList = newList;
         notifyDataSetChanged();
     }
 
@@ -37,22 +38,29 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        ProductEntity product = productList.get(position);
-        holder.nameText.setText(product.getName());
-        holder.categoryText.setText(product.getCategory());
-        holder.tagsText.setText(product.getTags() != null ? product.getTags().toString() : "No tags");
+        DisplayableItem item = itemList.get(position);
+        holder.nameText.setText(item.getName());
+        holder.categoryText.setText(item.getCategory());
+
+        // Set tags safely
+        if (item instanceof ProductEntity) {
+            holder.tagsText.setText(((ProductEntity)item).getTags() != null ?
+                    String.join(", ", ((ProductEntity)item).getTags()) : "None");
+        } else if (item instanceof DrugEntity) {
+            holder.tagsText.setText(((DrugEntity)item).getTags() != null ?
+                    String.join(", ", ((DrugEntity)item).getTags()) : "None");
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
-            intent.putExtra("product", product);
+            intent.putExtra("item", item);
             context.startActivity(intent);
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return productList != null ? productList.size() : 0;
+        return itemList != null ? itemList.size() : 0;
     }
 
     static class ProductViewHolder extends RecyclerView.ViewHolder {
