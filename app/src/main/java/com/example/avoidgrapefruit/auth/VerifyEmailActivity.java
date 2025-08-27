@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.avoidgrapefruit.R;
-import com.example.avoidgrapefruit.home.HomeActivity;
+import com.example.avoidgrapefruit.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,7 +29,7 @@ public class VerifyEmailActivity extends AppCompatActivity {
                 user.reload().addOnCompleteListener(task -> {
                     if (task.isSuccessful() && user.isEmailVerified()) {
                         Toast.makeText(this, "Email verified! Logging in...", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, HomeActivity.class));
+                        startActivity(new Intent(this, MainActivity.class));
                         finish();
                     } else {
                         Toast.makeText(this, "Email not verified yet. Please check your inbox.", Toast.LENGTH_LONG).show();

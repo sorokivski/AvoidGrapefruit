@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avoidgrapefruit.R;
+import com.example.avoidgrapefruit.interfaces.DisplayableItem;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -27,8 +28,8 @@ public class ProductActivity extends AppCompatActivity {
     private AutoCompleteTextView searchInput;
     private Spinner categorySpinner;
 
-    private List<ProductEntity> allProducts = new ArrayList<>();
-    private List<ProductEntity> filteredProducts = new ArrayList<>();
+    private List<DisplayableItem> allProducts = new ArrayList<>();
+    private List<DisplayableItem> filteredProducts = new ArrayList<>();
 
     private FirebaseFirestore db;
 
@@ -37,6 +38,10 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // show back arrow
+            getSupportActionBar().setTitle("Products"); // optional
+        }
         recyclerView = findViewById(R.id.recyclerView);
         searchInput = findViewById(R.id.searchInput);
         categorySpinner = findViewById(R.id.categorySpinner);
@@ -51,18 +56,31 @@ public class ProductActivity extends AppCompatActivity {
         setupCategoryFilter();
     }
 
+    // ===== Handle back arrow click =====
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // close this activity and go back
+        return true;
+    }
+
     private void fetchProductsFromFirebase() {
         db.collection("products").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 allProducts.clear();
                 for (QueryDocumentSnapshot doc : task.getResult()) {
-                    ProductEntity product = doc.toObject(ProductEntity.class);
-                    allProducts.add(product);
+                    String category = doc.getString("category");
+                    if (category != null && category.equalsIgnoreCase("Drug")) {
+                        DrugEntity drug = doc.toObject(DrugEntity.class);
+                        allProducts.add(drug);
+                    } else {
+                        ProductEntity product = doc.toObject(ProductEntity.class);
+                        allProducts.add(product);
+                    }
                 }
                 filteredProducts.clear();
                 filteredProducts.addAll(allProducts);
                 adapter.updateList(filteredProducts);
-                setupSearch(); // Refresh search suggestions after loading
+                setupSearch();
             } else {
                 Toast.makeText(this, "Failed to load products", Toast.LENGTH_SHORT).show();
             }
@@ -70,12 +88,14 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void setupSearch() {
-        String[] productNames = allProducts.stream()
-                .map(ProductEntity::getName)
+        String[] itemNames = allProducts.stream()
+                .map(DisplayableItem::getName)
                 .toArray(String[]::new);
 
-        searchInput.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, productNames));
+        ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, itemNames);
+
+        searchInput.setAdapter(searchAdapter);
 
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -101,15 +121,22 @@ public class ProductActivity extends AppCompatActivity {
 
     private void filterProducts(String query, String category) {
         filteredProducts.clear();
-        for (ProductEntity p : allProducts) {
-            boolean matchesQuery = p.getName().toLowerCase().contains(query.toLowerCase()) ||
-                    (p.getTags() != null && p.getTags().stream()
-                            .anyMatch(tag -> tag.toLowerCase().contains(query.toLowerCase())));
-            boolean matchesCategory = category.equals("All") || p.getCategory().equalsIgnoreCase(category);
-            if (matchesQuery && matchesCategory) {
-                filteredProducts.add(p);
+        for (DisplayableItem item : allProducts) {
+            boolean matchesQuery = item.getName().toLowerCase().contains(query.toLowerCase());
+
+            if (item instanceof ProductEntity && ((ProductEntity)item).getTags() != null) {
+                matchesQuery |= ((ProductEntity)item).getTags().stream()
+                        .anyMatch(tag -> tag.toLowerCase().contains(query.toLowerCase()));
+            } else if (item instanceof DrugEntity && ((DrugEntity)item).getTags() != null) {
+                matchesQuery |= ((DrugEntity)item).getTags().stream()
+                        .anyMatch(tag -> tag.toLowerCase().contains(query.toLowerCase()));
             }
+
+            boolean matchesCategory = category.equals("All") || item.getCategory().equalsIgnoreCase(category);
+
+            if (matchesQuery && matchesCategory) filteredProducts.add(item);
         }
         adapter.updateList(filteredProducts);
     }
+
 }
