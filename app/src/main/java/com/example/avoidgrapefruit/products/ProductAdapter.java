@@ -2,6 +2,7 @@ package com.example.avoidgrapefruit.products;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import com.example.avoidgrapefruit.interfaces.DisplayableItem;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private Context context;
+    private final Context context;
     private List<DisplayableItem> itemList;
 
     public ProductAdapter(Context context, List<DisplayableItem> itemList) {
@@ -39,21 +40,35 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         DisplayableItem item = itemList.get(position);
+
         holder.nameText.setText(item.getName());
         holder.categoryText.setText(item.getCategory());
 
-        // Set tags safely
+        // ===== Set tags safely =====
+        String tags = "None";
         if (item instanceof ProductEntity) {
-            holder.tagsText.setText(((ProductEntity)item).getTags() != null ?
-                    String.join(", ", ((ProductEntity)item).getTags()) : "None");
-        } else if (item instanceof DrugEntity) {
-            holder.tagsText.setText(((DrugEntity)item).getTags() != null ?
-                    String.join(", ", ((DrugEntity)item).getTags()) : "None");
-        }
+            List<String> tagList = ((ProductEntity) item).getTags();
+            if (tagList != null && !tagList.isEmpty()) {
+                tags = String.join(", ", tagList);
+            }
 
+            // Log important fields to check Firestore mapping
+            Log.d("ProductAdapter", "Product: " + ((ProductEntity) item).getName()
+                    + ", imageUrl: " + ((ProductEntity) item).getImageUrl()
+                    + ", nutritionalComponents: " + ((ProductEntity) item).getNutritionalComponents()
+                    + ", regionalDishes: " + ((ProductEntity) item).getRegionalDishes());
+        } else if (item instanceof DrugEntity) {
+            List<String> tagList = ((DrugEntity) item).getTags();
+            if (tagList != null && !tagList.isEmpty()) {
+                tags = String.join(", ", tagList);
+            }
+        }
+        holder.tagsText.setText(tags);
+
+        // ===== Click to open ProductDetailActivity =====
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
-            intent.putExtra("item", item);
+            intent.putExtra("item", item); // make sure item implements Serializable
             context.startActivity(intent);
         });
     }

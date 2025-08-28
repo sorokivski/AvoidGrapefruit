@@ -2,16 +2,19 @@ package com.example.avoidgrapefruit.products;
 
 import com.example.avoidgrapefruit.interfaces.DisplayableItem;
 import com.google.firebase.firestore.PropertyName;
-import lombok.Data;
+
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
-@Data
 public class ProductEntity implements Serializable, DisplayableItem {
+
     private String name;
+
+    @PropertyName("image_url")
     private String imageUrl;
+
     private String category;
     private String subtype;
     private List<String> tags;
@@ -24,25 +27,51 @@ public class ProductEntity implements Serializable, DisplayableItem {
     @PropertyName("regional_dishes")
     private Map<String, List<String>> regionalDishes;
 
+    // ===== No-arg constructor required by Firestore =====
+    public ProductEntity() { }
+
     // ---- DisplayableItem overrides ----
     @Override
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     @Override
-    public String getCategory() {
-        return category != null ? category : "Food";
-    }
+    public String getCategory() { return category != null ? category : "Food"; }
 
     @Override
-    public String getDescription() {
-        return subtype != null ? subtype : "No description available.";
+    public String getDescription() { return subtype != null ? subtype : "No description available."; }
+
+    // ===== Getters and Setters =====
+    public void setName(String name) { this.name = name; }
+
+    @PropertyName("image_url")
+    public String getImageUrl() { return imageUrl; }
+
+    @PropertyName("image_url")
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public void setCategory(String category) { this.category = category; }
+    public String getSubtype() { return subtype; }
+    public void setSubtype(String subtype) { this.subtype = subtype; }
+    public List<String> getTags() { return tags; }
+    public void setTags(List<String> tags) { this.tags = tags; }
+    public List<String> getExamples() { return examples; }
+    public void setExamples(List<String> examples) { this.examples = examples; }
+
+    // ===== Nutritional Components =====
+    @PropertyName("nutritional_components")
+    public List<String> getNutritionalComponents() { return nutritionalComponents; }
+
+    @PropertyName("nutritional_components")
+    public void setNutritionalComponents(List<String> nutritionalComponents) {
+        this.nutritionalComponents = nutritionalComponents;
     }
 
-    // Helper to safely set regionalDishes from Firestore snapshot
-    @SuppressWarnings("unchecked")
+    // ===== Regional Dishes =====
     @PropertyName("regional_dishes")
+    public Map<String, List<String>> getRegionalDishes() { return regionalDishes; }
+
+    @PropertyName("regional_dishes")
+    @SuppressWarnings("unchecked")
     public void setRegionalDishes(Object map) {
         if (map instanceof Map) {
             Map<String, List<String>> safeMap = new HashMap<>();
