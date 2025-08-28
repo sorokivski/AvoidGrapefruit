@@ -24,11 +24,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        // Back arrow on action bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Product Details");
         }
 
+        // Initialize views
         nameText = findViewById(R.id.detailName);
         categoryText = findViewById(R.id.detailCategory);
         subtypeText = findViewById(R.id.detailSubtype);
@@ -36,9 +38,10 @@ public class ProductDetailActivity extends AppCompatActivity {
         nutritionText = findViewById(R.id.detailNutrition);
         examplesText = findViewById(R.id.detailExamples);
         regionalText = findViewById(R.id.detailRegional);
-        extraInfoText = findViewById(R.id.detailExtraInfo); // New TextView for drug info
+        extraInfoText = findViewById(R.id.detailExtraInfo);
         productImage = findViewById(R.id.detailImage);
 
+        // Retrieve item
         DisplayableItem item = (DisplayableItem) getIntent().getSerializableExtra("item");
 
         if (item instanceof ProductEntity) {
@@ -72,17 +75,12 @@ public class ProductDetailActivity extends AppCompatActivity {
                 nutritionText.setText("Dosage info: N/A");
             }
 
-            // Precautions and recommendations
+            // Extra drug info
             StringBuilder extraInfo = new StringBuilder();
-            if (drug.getPrecautions() != null && !drug.getPrecautions().isEmpty()) {
-                extraInfo.append("Precautions:\n").append(listToString(drug.getPrecautions())).append("\n\n");
-            }
-            if (drug.getRecommendations() != null && !drug.getRecommendations().isEmpty()) {
-                extraInfo.append("Recommendations:\n").append(listToString(drug.getRecommendations())).append("\n\n");
-            }
-            if (drug.getBrandNames() != null && !drug.getBrandNames().isEmpty()) {
-                extraInfo.append("Brand Names:\n").append(listToString(drug.getBrandNames())).append("\n\n");
-            }
+            appendList(extraInfo, "Precautions", drug.getPrecautions());
+            appendList(extraInfo, "Recommendations", drug.getRecommendations());
+            appendList(extraInfo, "Brand Names", drug.getBrandNames());
+
             if (drug.getMealTiming() != null && !drug.getMealTiming().isEmpty()) {
                 extraInfo.append("Meal Timing:\n");
                 for (Map.Entry<String, String> entry : drug.getMealTiming().entrySet()) {
@@ -96,12 +94,14 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     }
 
+    // Handle back arrow
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
 
+    // Helper methods
     private String listToString(List<String> list) {
         return list != null && !list.isEmpty() ? String.join(", ", list) : "None";
     }
@@ -109,9 +109,17 @@ public class ProductDetailActivity extends AppCompatActivity {
     private String mapToString(Map<String, List<String>> map) {
         if (map == null || map.isEmpty()) return "None";
         StringBuilder sb = new StringBuilder();
-        for (String key : map.keySet()) {
-            sb.append(key).append(": ").append(String.join(", ", map.get(key))).append("\n");
+        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+            sb.append(entry.getKey()).append(": ")
+                    .append(entry.getValue() != null ? String.join(", ", entry.getValue()) : "None")
+                    .append("\n");
         }
         return sb.toString();
+    }
+
+    private void appendList(StringBuilder sb, String title, List<String> list) {
+        if (list != null && !list.isEmpty()) {
+            sb.append(title).append(":\n").append(String.join(", ", list)).append("\n\n");
+        }
     }
 }
