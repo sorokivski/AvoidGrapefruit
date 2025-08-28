@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AvoidGrapefruit</string>
     <string name="logout">Logout</string>
+    <string name="no_results">We haven`t found anything related in our database</string>
 </resources>

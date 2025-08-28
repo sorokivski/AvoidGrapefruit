@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.auth.AuthManager;
+import com.example.avoidgrapefruit.drugs.DrugSearchActivity;
 import com.example.avoidgrapefruit.user_drugs.AddUserDrugActivity;
 import com.example.avoidgrapefruit.user_drugs.EditUserDrugActivity;
 import com.example.avoidgrapefruit.user_drugs.UserDrugAdapter;
@@ -200,7 +201,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void openAddDrug() {
-        Intent intent = new Intent(this, AddUserDrugActivity.class);
+        Intent intent = new Intent(this, DrugSearchActivity.class);
         startActivity(intent);
     }
 
