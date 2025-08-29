@@ -44,6 +44,9 @@
             android:exported="false" />
         <activity android:name=".drugs.DrugSearchActivity"
             android:exported="false" />
+        <activity android:name=".drugs.DrugInfoActivity"
+            android:exported="false" />
+
 
 
         <activity

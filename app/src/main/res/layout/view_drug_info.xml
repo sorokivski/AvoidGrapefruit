@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/globalDrugScroll"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <include
+            android:id="@+id/sectionDescription"
+            layout="@layout/expandable_section" />
+
+        <include
+            android:id="@+id/sectionDosage"
+            layout="@layout/expandable_section" />
+
+        <include
+            android:id="@+id/sectionMealTiming"
+            layout="@layout/expandable_section" />
+
+        <include
+            android:id="@+id/sectionPrecautions"
+            layout="@layout/expandable_section" />
+
+        <TextView
+            android:text="Tags"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"/>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleLine="false"
+            app:singleSelection="false"
+            app:chipSpacing="8dp"
+            app:lineSpacing="8dp"/>
+
+        <TextView
+            android:text="Brand Names"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"/>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupBrands"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleLine="false"
+            app:singleSelection="false"
+            app:chipSpacing="8dp"
+            app:lineSpacing="8dp"/>
+
+        <TextView
+            android:text="Synonyms"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"/>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupSynonyms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="false"
+            app:chipSpacing="8dp"
+            app:lineSpacing="8dp"/>
+    </LinearLayout>
+</ScrollView>

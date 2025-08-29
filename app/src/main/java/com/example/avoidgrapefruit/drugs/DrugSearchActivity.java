@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,19 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avoidgrapefruit.R;
-import com.example.avoidgrapefruit.auth.AuthManager;
 import com.example.avoidgrapefruit.entity.Drug;
-import com.example.avoidgrapefruit.entity.UserDrug;
 import com.example.avoidgrapefruit.user_drugs.AddUserDrugActivity;
-import com.example.avoidgrapefruit.user_drugs.EditUserDrugActivity;
-
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class DrugSearchActivity extends AppCompatActivity {
@@ -117,7 +111,7 @@ public class DrugSearchActivity extends AppCompatActivity {
                     if (drugList.isEmpty()) {
                         fallbackSearch(query);
                     } else {
-                        updateUI(query); // pass query here too
+                        updateUI(query);
                     }
                 })
                 .addOnFailureListener(e ->
@@ -188,33 +182,9 @@ public class DrugSearchActivity extends AppCompatActivity {
 
 
     private void onDrugSelected(Drug drug) {
-        // Add to user drugs and open Edit screen
-        String userId = AuthManager.getInstance(this).getCurrentUserId();
-        if (userId == null) return;
-
-        DocumentReference userDrugRef = db.collection("users")
-                .document(userId)
-                .collection("drugs")
-                .document();
-
-        UserDrug userDrug = new UserDrug(
-                userDrugRef.getId(),
-                drug.getId(),
-                drug.getName(),
-                new Date(),
-                new Date(),
-                "",
-                1,
-                true,
-                new ArrayList<>()
-        );
-
-        userDrugRef.set(userDrug)
-                .addOnSuccessListener(unused -> {
-                    Intent intent = new Intent(this, EditUserDrugActivity.class);
-                    intent.putExtra("drugId", userDrug.getUuid());
-                    startActivity(intent);
-                    finish();
-                });
+        Intent intent = new Intent(this, DrugInfoActivity.class);
+        intent.putExtra("drugId", drug.getId());
+        Log.wtf("drug id: ", drug.getId());
+        startActivity(intent);
     }
 }

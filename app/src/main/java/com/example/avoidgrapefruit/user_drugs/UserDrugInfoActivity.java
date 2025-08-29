@@ -2,7 +2,6 @@ package com.example.avoidgrapefruit.user_drugs;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -10,21 +9,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
 
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.auth.AuthManager;
-import com.example.avoidgrapefruit.entity.Drug;
+import com.example.avoidgrapefruit.drugs.DrugInfoHelper;
 import com.example.avoidgrapefruit.entity.UserDrug;
-import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Locale;
 
 public class UserDrugInfoActivity extends AppCompatActivity {
@@ -54,9 +48,6 @@ public class UserDrugInfoActivity extends AppCompatActivity {
         userId = authManager.getCurrentUserId();
         String drugId = getIntent().getStringExtra("drugId");
         uuid  = getIntent().getStringExtra("uuid");
-        Log.wtf("User: ", userId);
-        Log.wtf("DrugId: ", drugId);
-        Log.wtf("User drug id:  ", uuid);
 
 
         if (userId == null || drugId == null) {
@@ -140,87 +131,11 @@ public class UserDrugInfoActivity extends AppCompatActivity {
     }
 
     private void loadGlobalDrug(String drugId) {
-        db.collection("drugs")
-                .document(drugId)
-                .get()
-                .addOnSuccessListener(doc -> {
-                    if (!doc.exists()) return;
-
-                    Drug globalDrug = doc.toObject(Drug.class);
-                    if (globalDrug == null) return;
-
-                    globalDrugScroll.setVisibility(View.VISIBLE);
-
-                    setupExpandableSection(sectionDescription, "Description", globalDrug.getDescription(), R.color.citrus_yellow);
-                    setupExpandableSection(sectionDosage, "Dosage Info", formatDosage(globalDrug.getDosageInfo()), R.color.accent_green);
-                    if (globalDrug.isMealTimingRequired()) {
-                        setupExpandableSection(
-                                sectionMealTiming,
-                                "Meal Timing",
-                                globalDrug.getMealTiming(),
-                                R.color.accent_green
-                        );
-                    } else {
-                        sectionMealTiming.setVisibility(View.GONE);
-                    }
-
-                    setupExpandableSection(sectionPrecautions, "Precautions", joinList(globalDrug.getPrecautions()), R.color.wood_brown);
-
-                    populateChips(chipGroupTags, globalDrug.getTags(), R.style.ChipTag);
-                    populateChips(chipGroupBrands, globalDrug.getBrandNames(), R.style.ChipBrand);
-                    populateChips(chipGroupSynonyms, globalDrug.getSynonyms(), R.style.ChipSynonym);
-                });
-    }
-
-    private void setupExpandableSection(View section, String title, String content, @ColorRes int color) {
-
-
-        TextView titleView = section.findViewById(R.id.sectionTitle);
-        TextView contentView = section.findViewById(R.id.sectionContent);
-
-        titleView.setText(title);
-        contentView.setText(content);
-        contentView.setVisibility(View.GONE);
-
-        // Tint title color
-        titleView.setTextColor(ContextCompat.getColor(this, color));
-
-        // Toggle expand/collapse
-        titleView.setOnClickListener(v -> {
-            contentView.setVisibility(contentView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-        });
+        DrugInfoHelper helper = new DrugInfoHelper(this, db);
+        helper.loadGlobalDrug(drugId, globalDrugScroll,
+                sectionDescription, sectionDosage, sectionMealTiming, sectionPrecautions,
+                chipGroupTags, chipGroupBrands, chipGroupSynonyms);
     }
 
 
-    private void populateChips(ChipGroup chipGroup, List<String> items, int chipStyle) {
-        chipGroup.removeAllViews();
-
-        if (items == null || items.isEmpty()) {
-            chipGroup.setVisibility(View.GONE);
-            return;
-        } else {
-            chipGroup.setVisibility(View.VISIBLE);
-        }
-
-        for (String item : items) {
-            ContextThemeWrapper wrapper = new ContextThemeWrapper(this, chipStyle);
-            Chip chip = new Chip(wrapper);
-            chip.setText(item);
-            chip.setClickable(false);
-            chip.setCheckable(false);
-            chipGroup.addView(chip);
-        }
-    }
-
-
-
-    private String joinList(List<String> items) {
-        return items == null ? "" : "• " + String.join("\n• ", items);
-    }
-
-    private String formatDosage(Drug.DosageInfo dosage) {
-        if (dosage == null) return "";
-        return "Form: " + dosage.getForm() + "\nFrequency: " + dosage.getFrequency() +
-                "\nStrength: " + dosage.getStrength() + "\nDuration: " + dosage.getDuration();
-    }
 }
