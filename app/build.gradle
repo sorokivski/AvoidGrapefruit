@@ -33,6 +33,7 @@ android {
     }
     buildFeatures {
         compose true
+        viewBinding true
     }
 }
 
@@ -67,6 +68,9 @@ dependencies {
     implementation libs.material.v1110
     implementation libs.recyclerview.swipedecorator
     implementation libs.flexbox
+    implementation libs.androidx.cardview
+    implementation libs.androidx.fragment.ktx
+
 
 
     testImplementation libs.junit

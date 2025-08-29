@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.avoidgrapefruit.R;
-import com.example.avoidgrapefruit.home.HomeActivity;
+import com.example.avoidgrapefruit.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,8 +43,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
-        googleAuth = new GoogleAuth(this);
 
+        googleAuth = new GoogleAuth(this);
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
         // Initialize views
         editEmail = findViewById(R.id.enterLogin);
         editPassword = findViewById(R.id.enterPassword);
@@ -69,10 +70,13 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
+                    Log.d("Google Sign-In result received", result.toString());
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         GoogleSignInAccount account = googleAuth.getAccountFromIntent(result.getData());
+                        Log.d("Account: ", account.toString());
                         if (account != null) {
                             firebaseAuthWithGoogle(account.getIdToken());
+
                         } else {
                             Toast.makeText(this, "Google sign-in failed", Toast.LENGTH_SHORT).show();
                         }
@@ -137,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         progressBar.setVisibility(View.VISIBLE);
+        Log.d("ID Token: " , idToken);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
@@ -150,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToHome() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

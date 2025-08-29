@@ -2,22 +2,18 @@
 <resources>
 
     <style name="Theme.AvoidGrapefruit" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- or Theme.MaterialComponents.DayNight.NoActionBar -->
 
-        <!-- Primary brand color -->
         <item name="colorPrimary">@color/grapefruit_red</item>
         <item name="colorOnPrimary">@android:color/white</item>
 
-        <!-- Secondary color -->
         <item name="colorSecondary">@color/accent_green</item>
         <item name="colorOnSecondary">@android:color/white</item>
 
-        <!-- Background and surface -->
         <item name="colorSurface">@android:color/white</item>
         <item name="colorOnSurface">@android:color/black</item>
 
-        <!-- Optional: override default button styles -->
         <item name="buttonStyle">@drawable/button_primary</item>
+<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
     </style>
 
 

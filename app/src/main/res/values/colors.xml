@@ -9,4 +9,12 @@
     <color name="wood_brown">#644A25</color>
     <color name="citrus_yellow">#5D5903</color>
     <color name="lime_peel">#9FD35F</color>
+    <color name="purple_700">#6200EE</color>
+    <color name="gray">#666666</color>
+    <color name="black">#000000</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="white">#FFFFFF</color>
+    <color name="milk_white_200">#F5F5F5</color>
 </resources>
