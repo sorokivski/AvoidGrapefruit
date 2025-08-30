@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.auth.GoogleAuth;
 import com.example.avoidgrapefruit.auth.LoginActivity;
-import com.example.avoidgrapefruit.products.ProductActivity;
+import com.example.avoidgrapefruit.products.ProductFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeFragment extends Fragment {
@@ -32,15 +32,15 @@ public class HomeFragment extends Fragment {
         googleAuth = new GoogleAuth(requireActivity());
 
         // Logout button
-        Button btnLogout = view.findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(v -> logoutUser());
+       // Button btnLogout = view.findViewById(R.id.btnLogout);
+        //btnLogout.setOnClickListener(v -> logoutUser());
 
         // Go to Products button
-        Button btnGoToProducts = view.findViewById(R.id.btnGoToProducts);
-        btnGoToProducts.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), ProductActivity.class);
-            startActivity(intent);
-        });
+        //Button btnGoToProducts = view.findViewById(R.id.btnGoToProducts);
+        //btnGoToProducts.setOnClickListener(v -> {
+            //Intent intent = new Intent(requireContext(), ProductFragment.class);
+           // startActivity(intent);
+        //});
 
         return view;
     }
