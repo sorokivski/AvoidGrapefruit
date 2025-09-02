@@ -1,4 +1,4 @@
-package com.example.avoidgrapefruit.products;
+package com.example.avoidgrapefruit;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.interfaces.DisplayableItem;
+import com.example.avoidgrapefruit.products.DrugEntity;
+import com.example.avoidgrapefruit.products.ProductAdapter;
+import com.example.avoidgrapefruit.products.ProductEntity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 

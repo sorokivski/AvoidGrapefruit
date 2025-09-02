@@ -1,119 +1,142 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:attr/windowBackground"
     android:fitsSystemWindows="true"
-    android:padding="16dp">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="32dp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="?android:attr/dividerHorizontal"
-        android:showDividers="middle"
-        android:dividerPadding="8dp">
+        android:orientation="vertical">
 
-        <!-- Product Image -->
-        <androidx.cardview.widget.CardView
+        <!-- Default AppBar -->
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/detailImage"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Product Image" />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="?attr/actionBarSize"
+                app:title="Product Details" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Product Name -->
-        <TextView
-            android:id="@+id/detailName"
+        <!-- Content Section -->
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:paddingBottom="8dp" />
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:dividerPadding="8dp">
 
-        <!-- Info Card -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            android:padding="12dp">
-
-            <LinearLayout
-                android:orientation="vertical"
+            <!-- Product Image -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
-                <TextView
-                    android:id="@+id/detailCategory"
+                <ImageView
+                    android:id="@+id/detailImage"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="@color/purple_700"
-                    android:paddingBottom="4dp" />
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Product Image" />
+            </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/detailSubtype"
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/detailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Info Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
-                    android:paddingBottom="4dp" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/detailTags"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
-                    android:paddingBottom="4dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/detailCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/purple_700"
+                        android:layout_marginBottom="4dp" />
 
-        <!-- Nutrition -->
-        <TextView
-            android:id="@+id/detailNutrition"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:paddingBottom="8dp" />
+                    <TextView
+                        android:id="@+id/detailSubtype"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray"
+                        android:layout_marginBottom="4dp" />
 
-        <!-- Examples -->
-        <TextView
-            android:id="@+id/detailExamples"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:paddingBottom="8dp" />
+                    <TextView
+                        android:id="@+id/detailTags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray"
+                        android:layout_marginBottom="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        <!-- Regional Dishes -->
-        <TextView
-            android:id="@+id/detailRegional"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:paddingBottom="8dp" />
+            <!-- Nutrition -->
+            <TextView
+                android:id="@+id/detailNutrition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/detailExtraInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Extra Info"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:padding="4dp" />
+            <!-- Examples -->
+            <TextView
+                android:id="@+id/detailExamples"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
 
+            <!-- Regional Dishes -->
+            <TextView
+                android:id="@+id/detailRegional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Extra Info -->
+            <TextView
+                android:id="@+id/detailExtraInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Extra Info"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:padding="12dp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

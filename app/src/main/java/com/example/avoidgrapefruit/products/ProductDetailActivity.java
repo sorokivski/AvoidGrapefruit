@@ -24,10 +24,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        // Back arrow on action bar
+        // ===== Back arrow using Toolbar =====
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Product Details");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // show back arrow
+            getSupportActionBar().setTitle("Product Details");   // optional title
         }
 
         // Initialize views
@@ -89,15 +92,15 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
             extraInfoText.setText(extraInfo.toString());
 
-            examplesText.setText(""); // Not applicable
+            examplesText.setText(""); // Not applicabl
             regionalText.setText(""); // Not applicable
         }
     }
 
-    // Handle back arrow
+    // Handle back arrow click
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
+        finish(); // close activity and return to previous page
         return true;
     }
 

@@ -1,13 +1,14 @@
 package com.example.avoidgrapefruit;
 
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.avoidgrapefruit.home.HomeFragment;
-import com.example.avoidgrapefruit.products.ProductFragment;
+import com.example.avoidgrapefruit.HomeFragment;
+import com.example.avoidgrapefruit.ProductFragment;
 import com.example.avoidgrapefruit.user.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
