@@ -1,11 +1,13 @@
 [versions]
 agp = "8.11.1"
+cardview = "1.0.0"
 circleimageview = "3.1.0"
 compiler = "4.16.0"
 firebaseBom = "34.0.0"
 firebaseBomVersion = "32.7.0"
 firebaseFirestore = "24.9.1"
 flexbox = "3.0.0"
+fragmentKtx = "1.6.2"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -14,7 +16,6 @@ espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
 composeBom = "2024.09.00"
-firebaseAuthKtx = "24.0.0"
 appcompat = "1.7.1"
 lombok = "1.18.38"
 luceneAnalyzersCommon = "9.10.0"
@@ -29,7 +30,9 @@ recyclerviewSwipedecorator = "1.4"
 playServicesLocation = "21.3.0"
 
 [libraries]
+androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
@@ -56,9 +59,6 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version = "23.2.0" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
-lucene-analyzers-common = { module = "org.apache.lucene:lucene-analyzers-common", version.ref = "luceneAnalyzersCommon" }
-lucene-core = { module = "org.apache.lucene:lucene-core", version.ref = "luceneCore" }
-lucene-queryparser = { module = "org.apache.lucene:lucene-queryparser", version.ref = "luceneQueryparser" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }

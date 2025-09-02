@@ -8,13 +8,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.avoidgrapefruit.MainActivity;
 import com.example.avoidgrapefruit.R;
-import com.example.avoidgrapefruit.home.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 public class VerifyEmailActivity extends AppCompatActivity {
 
-    private Button btnCheckVerified;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +24,10 @@ public class VerifyEmailActivity extends AppCompatActivity {
 
         btnCheckVerified.setOnClickListener(v -> checkEmailVerification());
 
-        // Check if app was opened from a Firebase email verification link
         Uri deepLink = getIntent().getData();
         if (deepLink != null) {
             FirebaseAuth auth = FirebaseAuth.getInstance();
             if (auth.isSignInWithEmailLink(deepLink.toString())) {
-                // You can retrieve the email from extras or saved state
                 String email = getIntent().getStringExtra("email");
 
                 if (email != null) {
@@ -66,14 +63,14 @@ public class VerifyEmailActivity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        setIntent(intent); // update intent
+        setIntent(intent);
         handleEmailActionLink(intent);
     }
 
@@ -83,10 +80,8 @@ public class VerifyEmailActivity extends AppCompatActivity {
             FirebaseAuth auth = FirebaseAuth.getInstance();
             String linkStr = link.toString();
             if (auth.isSignInWithEmailLink(linkStr)) {
-                // Retrieve the email used during sign-up (we passed it in SignUpActivity)
                 String email = getIntent().getStringExtra("email");
                 if (email == null) {
-                    // fallback if lost
                     email = getSharedPreferences("APP_PREFS", MODE_PRIVATE)
                             .getString("pendingEmail", null);
                 }
@@ -97,7 +92,7 @@ public class VerifyEmailActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = task.getResult().getUser();
                                     Toast.makeText(this, "Email verified! Logging in...", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(this, HomeActivity.class));
+                                    startActivity(new Intent(this, MainActivity.class));
                                     finish();
                                 } else {
                                     Toast.makeText(this,

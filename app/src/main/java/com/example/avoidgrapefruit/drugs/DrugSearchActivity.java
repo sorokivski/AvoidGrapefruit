@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +30,6 @@ import java.util.List;
 
 public class DrugSearchActivity extends AppCompatActivity {
 
-    private EditText etSearch;
-    private RecyclerView recyclerView;
     private LinearLayout layoutNoResults;
     private TextView tvNoResultsMessage;
     private Button btnAddPersonalDrug;
@@ -45,9 +44,10 @@ public class DrugSearchActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        etSearch = findViewById(R.id.etSearch);
-        Button btnSearch = findViewById(R.id.btnSearch);
-        recyclerView = findViewById(R.id.recyclerDrugs);
+        EditText etSearch = findViewById(R.id.etSearch);
+        ImageButton btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
+        RecyclerView recyclerView = findViewById(R.id.recyclerDrugs);
 
         layoutNoResults = findViewById(R.id.layoutNoResults);
         tvNoResultsMessage = findViewById(R.id.tvNoResultsMessage);

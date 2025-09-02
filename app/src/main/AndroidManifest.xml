@@ -22,12 +22,6 @@
             android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".products.ProductDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".home.HomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".user.UserProfileActivity"
             android:exported="false" />
         <activity
@@ -41,25 +35,29 @@
             android:exported="false" />
         <activity android:name=".user_drugs.UserDrugInfoActivity"
             android:exported="false" />
-        <activity android:name=".interactions.InteractionsActivity"
-            android:exported="false" />
         <activity android:name=".drugs.DrugSearchActivity"
             android:exported="false" />
         <activity android:name=".drugs.DrugInfoActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".products.ProductDetailActivity"
+            android:exported="false" />
+        <activity android:name=".products.ProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".interactions.InteractionsActivity"
+            android:exported="false" />
 
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AvoidGrapefruit">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".auth.VerifyEmailActivity"
             android:exported="true">

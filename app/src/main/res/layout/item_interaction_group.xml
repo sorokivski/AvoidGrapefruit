@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
-    android:background="@drawable/bg_card_accent"
+    android:background="@drawable/bg_severity_chip"
     android:layout_marginBottom="12dp">
 
     <TextView

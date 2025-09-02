@@ -1,8 +1,12 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?android:attr/windowBackground"
+    android:background="@color/milk_white"
+    android:layout_marginTop="60dp"
     android:padding="16dp">
 
     <LinearLayout
@@ -25,8 +29,8 @@
                 android:id="@+id/detailImage"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Product Image" />
+                android:contentDescription="Product Image"
+                android:scaleType="centerCrop" />
         </androidx.cardview.widget.CardView>
 
         <!-- Product Name -->
@@ -58,21 +62,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textColor="@color/purple_700"
+                    android:textColor="@color/accent_green"
                     android:paddingBottom="4dp" />
 
                 <TextView
                     android:id="@+id/detailSubtype"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/dark_grey"
                     android:paddingBottom="4dp" />
 
                 <TextView
                     android:id="@+id/detailTags"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/dark_grey"
                     android:paddingBottom="4dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -91,7 +95,7 @@
             android:id="@+id/detailExamples"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:textSize="16sp"
             android:paddingBottom="8dp" />
 
@@ -116,3 +120,17 @@
 
     </LinearLayout>
 </ScrollView>
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="Go Back"
+        android:src="@drawable/ic_arrow_back"
+        android:elevation="8dp"
+        android:padding="10dp" />
+
+</RelativeLayout>

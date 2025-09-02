@@ -1,6 +1,7 @@
 package com.example.avoidgrapefruit.products;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,14 +16,20 @@ import java.util.Map;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
-    private TextView nameText, categoryText, subtypeText, tagsText, nutritionText,
-            examplesText, regionalText, extraInfoText;
+    private TextView categoryText;
+    private TextView subtypeText;
+    private TextView tagsText;
+    private TextView nutritionText;
+    private TextView examplesText;
+    private TextView regionalText;
+    private TextView extraInfoText;
     private ImageView productImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
 
         // Back arrow on action bar
         if (getSupportActionBar() != null) {
@@ -31,7 +38,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
         // Initialize views
-        nameText = findViewById(R.id.detailName);
+        TextView nameText = findViewById(R.id.detailName);
         categoryText = findViewById(R.id.detailCategory);
         subtypeText = findViewById(R.id.detailSubtype);
         tagsText = findViewById(R.id.detailTags);
@@ -40,6 +47,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         regionalText = findViewById(R.id.detailRegional);
         extraInfoText = findViewById(R.id.detailExtraInfo);
         productImage = findViewById(R.id.detailImage);
+        ImageButton btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
 
         // Retrieve item
         DisplayableItem item = (DisplayableItem) getIntent().getSerializableExtra("item");
