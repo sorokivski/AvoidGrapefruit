@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.auth.AuthManager;
 import com.example.avoidgrapefruit.drugs.DrugSearchActivity;
-import com.example.avoidgrapefruit.user_drugs.AddUserDrugActivity;
+import com.example.avoidgrapefruit.home.BaseActivity;
 import com.example.avoidgrapefruit.user_drugs.EditUserDrugActivity;
 import com.example.avoidgrapefruit.user_drugs.UserDrugAdapter;
 import com.example.avoidgrapefruit.entity.User;
@@ -36,7 +35,7 @@ import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends BaseActivity {
 
     private TextView tvUserName, tvUserAge, tvAllergies, tvMedicalConditions;
     private ImageView ivUserPicture;
@@ -44,6 +43,10 @@ public class UserProfileActivity extends AppCompatActivity {
     private User user;
 
     private AuthManager authManager;
+    @Override
+    protected int getBottomNavMenuItemId() {
+        return R.id.user;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,9 +172,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
                                 drugAdapter.setData(drugs);
                             })
-                            .addOnFailureListener(e -> {
-                                drugAdapter.setData(new ArrayList<>());
-                            });
+                            .addOnFailureListener(e -> drugAdapter.setData(new ArrayList<>()));
 
                 })
                 .addOnFailureListener(e -> {
@@ -234,9 +235,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     drugAdapter.removeDrug(drug);
                     Toast.makeText(this, "Drug deleted", Toast.LENGTH_SHORT).show();
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
 }

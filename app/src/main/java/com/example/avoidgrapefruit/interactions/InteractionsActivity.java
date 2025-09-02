@@ -15,13 +15,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.app.ActivityCompat;
 
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.auth.AuthManager;
 import com.example.avoidgrapefruit.entity.Interaction;
+import com.example.avoidgrapefruit.home.BaseActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.chip.Chip;
@@ -30,7 +30,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,7 +39,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class InteractionsActivity extends AppCompatActivity {
+public class InteractionsActivity extends BaseActivity {
 
     private LinearLayout containerInteractions;
     private TextView tvEmpty;
@@ -55,6 +54,10 @@ public class InteractionsActivity extends AppCompatActivity {
     private String userRegion = null;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
 
+    @Override
+    protected int getBottomNavMenuItemId() {
+        return R.id.interactions;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class InteractionsActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-            fetchUserRegion(() -> loadUserInteractions());
+            fetchUserRegion(this::loadUserInteractions);
         } else {
             ActivityCompat.requestPermissions(
                     this,
@@ -349,8 +352,8 @@ public class InteractionsActivity extends AppCompatActivity {
                         1,
                         new Geocoder.GeocodeListener() {
                             @Override
-                            public void onGeocode(List<Address> addresses) {
-                                if (addresses != null && !addresses.isEmpty()) {
+                            public void onGeocode(@NonNull List<Address> addresses) {
+                                if (!addresses.isEmpty()) {
                                     userRegion = addresses.get(0).getCountryName();
                                     Log.wtf("Region", "Detected region: " + userRegion);
                                 }
@@ -358,7 +361,7 @@ public class InteractionsActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onError(@NonNull String errorMessage) {
+                            public void onError(String errorMessage) {
                                 Log.e("Region", "Geocoding failed: " + errorMessage);
                                 if (onRegionReady != null) onRegionReady.run(); // still run even if failed
                             }

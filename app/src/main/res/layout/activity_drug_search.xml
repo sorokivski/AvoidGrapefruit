@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal">
 
         <EditText
@@ -17,14 +18,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints=""
             android:hint="Search drug..."
             android:inputType="text" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search" />
+            android:src="@drawable/ic_search"
+            android:contentDescription="Search icon"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
     </LinearLayout>
 
     <!-- RecyclerView for results -->
@@ -75,5 +82,14 @@
             android:paddingRight="24dp" />
     </LinearLayout>
 
-
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Go Back"
+        android:elevation="8dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_arrow_back" />
 </LinearLayout>

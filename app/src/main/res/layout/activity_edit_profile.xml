@@ -9,7 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_gradient" />
+        android:background="@drawable/bg_severity_chip" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                 android:background="@drawable/button_primary"
                 android:minHeight="48dp"
                 android:text="Save"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/milk_white" />
 
         </LinearLayout>
     </ScrollView>
@@ -156,6 +156,7 @@
         android:layout_marginTop="16dp"
         android:contentDescription="Go Back"
         android:src="@drawable/ic_arrow_back"
+        android:background="@drawable/bg_google_button"
         android:elevation="8dp"
         android:padding="10dp" />
 

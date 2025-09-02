@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- ===== Required Permissions ===== -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,39 +17,61 @@
         android:theme="@style/Theme.AvoidGrapefruit">
         <activity
             android:name=".auth.SignUpActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".products.ProductActivity"
             android:exported="false" />
         <activity
             android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".user.UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user_drugs.AddUserDrugActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user_drugs.EditUserDrugActivity"
+            android:exported="false" />
+        <activity android:name=".user_drugs.UserDrugInfoActivity"
+            android:exported="false" />
+        <activity android:name=".drugs.DrugSearchActivity"
+            android:exported="false" />
+        <activity android:name=".drugs.DrugInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".products.ProductDetailActivity"
             android:exported="false" />
+        <activity android:name=".products.ProductActivity"
+            android:exported="false" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".interactions.InteractionsActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".auth.VerifyEmailActivity"
-            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="AvoidGrapefruit"
-            android:theme="@style/Theme.AvoidGrapefruit">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".auth.VerifyEmailActivity"
+            android:exported="true">
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="avoid-grapefruit.firebaseapp.com"
+                    android:pathPrefix="/__/auth/callback" />
             </intent-filter>
         </activity>
     </application>

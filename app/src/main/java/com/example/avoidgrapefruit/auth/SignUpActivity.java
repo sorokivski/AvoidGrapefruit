@@ -12,126 +12,112 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.avoidgrapefruit.R;
 import com.example.avoidgrapefruit.MainActivity;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText editEmail, editPassword;
-    private Button btnSignUp;
     private ProgressBar progressBar;
     private FirebaseAuth firebaseAuth;
-    private GoogleAuth googleAuth;
 
-    private ActivityResultLauncher<Intent> googleSignInLauncher;
+    private AuthManager authManager;
+    private ActivityResultLauncher<IntentSenderRequest> googleSignInLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Firebase
         firebaseAuth = FirebaseAuth.getInstance();
-        googleAuth = new GoogleAuth(this);
+        authManager = AuthManager.getInstance(this);
 
-        // Views
         editEmail = findViewById(R.id.editEmailSignUp);
         editPassword = findViewById(R.id.editPasswordSignUp);
-        btnSignUp = findViewById(R.id.btnSignUp);
+        Button btnSignUp = findViewById(R.id.btnSignUp);
         progressBar = findViewById(R.id.progressBar);
         TextView tvAlreadyHaveAccount = findViewById(R.id.tvAlreadyHaveAccount);
         LinearLayout btnGoogleSignIn = findViewById(R.id.btnCustomGoogle);
 
         progressBar.setVisibility(View.GONE);
 
+        // --- Email sign up ---
+        btnSignUp.setOnClickListener(view -> signUpWithEmail());
+
         tvAlreadyHaveAccount.setOnClickListener(view -> {
             startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             finish();
         });
 
-        btnGoogleSignIn.setOnClickListener(view -> {
-            Intent signInIntent = googleAuth.getSignInIntent();
-            googleSignInLauncher.launch(signInIntent);
-        });
-
+        // --- Google sign up ---
         googleSignInLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultContracts.StartIntentSenderForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        GoogleSignInAccount account = googleAuth.getAccountFromIntent(result.getData());
-                        if (account != null) {
-                            firebaseAuthWithGoogle(account.getIdToken());
-                        } else {
-                            Toast.makeText(this, "Google sign-in failed", Toast.LENGTH_SHORT).show();
-                        }
+                        authManager.handleGoogleSignInResult(result.getData(), task -> {
+                            if (task.isSuccessful()) {
+                                navigateToHome();
+                            } else {
+                                Toast.makeText(this, "Google sign-up failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
 
-        btnSignUp.setOnClickListener(view -> {
-            String email = editEmail.getText().toString().trim();
-            String password = editPassword.getText().toString().trim();
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                editEmail.setError("Enter a valid email");
-                editEmail.requestFocus();
-                return;
-            }
-
-            if (password.length() < 6) {
-                editPassword.setError("Password must be at least 6 characters");
-                editPassword.requestFocus();
-                return;
-            }
-
-            progressBar.setVisibility(View.VISIBLE);
-
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            if (user != null) {
-                                user.sendEmailVerification().addOnCompleteListener(verifyTask -> {
-                                    if (verifyTask.isSuccessful()) {
-                                        getSharedPreferences("APP_PREFS", MODE_PRIVATE)
-                                                .edit()
-                                                .putString("pendingEmail", email)
-                                                .apply();
-
-                                        Intent intent = new Intent(this, VerifyEmailActivity.class);
-                                        intent.putExtra("email", email); // pass email forward
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                });
-                            }
-                        }
-                    });
-        });
+        btnGoogleSignIn.setOnClickListener(v ->
+                authManager.signInWithGoogle(this, googleSignInLauncher));
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
+    private void signUpWithEmail() {
+        String email = editEmail.getText().toString().trim();
+        String password = editPassword.getText().toString().trim();
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editEmail.setError("Enter a valid email");
+            editEmail.requestFocus();
+            return;
+        }
+        if (password.length() < 6) {
+            editPassword.setError("Password must be at least 6 characters");
+            editPassword.requestFocus();
+            return;
+        }
+
         progressBar.setVisibility(View.VISIBLE);
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-                        navigateToHome();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user != null) {
+                            user.sendEmailVerification().addOnCompleteListener(verifyTask -> {
+                                if (verifyTask.isSuccessful()) {
+                                    getSharedPreferences("APP_PREFS", MODE_PRIVATE)
+                                            .edit()
+                                            .putString("pendingEmail", email)
+                                            .apply();
+
+                                    Toast.makeText(this, "Verification email sent. Please check your inbox.", Toast.LENGTH_LONG).show();
+
+                                    Intent intent = new Intent(this, VerifyEmailActivity.class);
+                                    intent.putExtra("email", email);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                        }
                     } else {
-                        Toast.makeText(this,
-                                "Google auth failed: " + task.getException().getMessage(),
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Sign up failed: " +
+                                task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+
     }
 
     private void navigateToHome() {

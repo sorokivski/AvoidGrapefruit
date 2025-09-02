@@ -1,5 +1,6 @@
 package com.example.avoidgrapefruit.products;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -12,20 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avoidgrapefruit.R;
-import com.example.avoidgrapefruit.interfaces.DisplayableItem;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private final Context context;
-    private List<DisplayableItem> itemList;
+    private List<ProductEntity> itemList;
 
-    public ProductAdapter(Context context, List<DisplayableItem> itemList) {
+    public ProductAdapter(Context context, List<ProductEntity> itemList) {
         this.context = context;
         this.itemList = itemList;
     }
 
-    public void updateList(List<DisplayableItem> newList) {
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateList(List<ProductEntity> newList) {
         this.itemList = newList;
         notifyDataSetChanged();
     }
@@ -39,29 +40,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        DisplayableItem item = itemList.get(position);
+        ProductEntity item = itemList.get(position);
 
         holder.nameText.setText(item.getName());
         holder.categoryText.setText(item.getCategory());
 
         // ===== Set tags safely =====
         String tags = "None";
-        if (item instanceof ProductEntity) {
-            List<String> tagList = ((ProductEntity) item).getTags();
+        {
+            List<String> tagList = item.getTags();
             if (tagList != null && !tagList.isEmpty()) {
                 tags = String.join(", ", tagList);
             }
 
             // Log important fields to check Firestore mapping
-            Log.d("ProductAdapter", "Product: " + ((ProductEntity) item).getName()
-                    + ", imageUrl: " + ((ProductEntity) item).getImageUrl()
-                    + ", nutritionalComponents: " + ((ProductEntity) item).getNutritionalComponents()
-                    + ", regionalDishes: " + ((ProductEntity) item).getRegionalDishes());
-        } else if (item instanceof DrugEntity) {
-            List<String> tagList = ((DrugEntity) item).getTags();
-            if (tagList != null && !tagList.isEmpty()) {
-                tags = String.join(", ", tagList);
-            }
+            Log.d("ProductAdapter", "Product: " + item.getName()
+                    + ", imageUrl: " + item.getImageUrl()
+                    + ", nutritionalComponents: " + item.getNutritionalComponents()
+                    + ", regionalDishes: " + item.getRegionalDishes());
         }
         holder.tagsText.setText(tags);
 
