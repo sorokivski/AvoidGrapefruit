@@ -32,7 +32,7 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
-                android:contentDescription="profile pic"
+                android:contentDescription="@string/avatar"
                 android:src="@drawable/add_picture"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/CircleImage" />
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="user@example.com"
+                android:text="@string/email_example"
                 android:textSize="16sp"
                 android:textColor="@color/dark_grey"
                 android:textStyle="bold"
@@ -55,7 +55,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:layout_marginTop="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -70,7 +70,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Age"
+                android:hint="@string/age"
                 android:layout_marginTop="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -92,7 +92,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male"
+                    android:text="@string/male"
                     android:checkable="true" />
 
                 <com.google.android.material.chip.Chip
@@ -100,7 +100,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"
+                    android:text="@string/female"
                     android:checkable="true" />
             </com.google.android.material.chip.ChipGroup>
 
@@ -109,7 +109,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Medical Conditions"
+                android:hint="@string/medical_conditions"
                 android:layout_marginTop="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:layout_marginTop="8dp"
-                android:hint="Allergies">
+                android:hint="@string/allergies">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAllergies"
@@ -141,7 +141,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/button_primary"
                 android:minHeight="48dp"
-                android:text="Save"
+                android:text="@string/save"
                 android:textColor="@color/milk_white" />
 
         </LinearLayout>
@@ -154,7 +154,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="Go Back"
+        android:contentDescription="@string/back"
         android:src="@drawable/ic_arrow_back"
         android:background="@drawable/bg_google_button"
         android:elevation="8dp"

@@ -18,7 +18,7 @@
         android:id="@+id/btnAddToMyDrugs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to My Drugs"
+        android:text="@string/add_to_my_drugs"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:backgroundTint="@color/grapefruit_red"
@@ -37,7 +37,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@drawable/ic_arrow_back"
-        android:contentDescription="back"
+        android:contentDescription="@string/back"
         android:background="?attr/selectableItemBackgroundBorderless"/>
 
 </RelativeLayout>

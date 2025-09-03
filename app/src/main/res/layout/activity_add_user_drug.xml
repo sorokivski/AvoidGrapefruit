@@ -9,35 +9,32 @@
     android:layout_width="48dp"
     android:layout_height="48dp"
     android:background="?attr/selectableItemBackgroundBorderless"
-    android:contentDescription="Go Back"
+    android:contentDescription="@string/back"
     android:src="@drawable/ic_arrow_back" />
 
 
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
-
-
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <EditText
             android:id="@+id/etDrugName"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="Drug name" />
+            android:hint="@string/drug_name" />
 
         <EditText
             android:id="@+id/etDosage"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="Dosage" />
+            android:hint="@string/dosage" />
 
         <EditText
             android:id="@+id/etStartDate"
@@ -45,7 +42,7 @@
             android:layout_height="55dp"
             android:clickable="true"
             android:focusable="false"
-            android:hint="Start Date" />
+            android:hint="@string/start_date" />
 
         <EditText
             android:id="@+id/etEndDate"
@@ -53,25 +50,25 @@
             android:layout_height="55dp"
             android:clickable="true"
             android:focusable="false"
-            android:hint="End Date" />
+            android:hint="@string/end_date" />
 
         <EditText
             android:id="@+id/etAmountPerDay"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="Amount per day"
+            android:hint="@string/amount_per_day"
             android:inputType="number" />
 
         <!-- Intake times checkboxes -->
         <TextView
-            android:text="Select Intake Times"
+            android:text="@string/select_intake_times"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"/>
 
         <CheckBox
             android:id="@+id/cbMorning"
-            android:text="Morning"
+            android:text="@string/morning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -79,11 +76,11 @@
             android:id="@+id/cbAfternoon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Afternoon" />
+            android:text="@string/afternoon" />
 
         <CheckBox
             android:id="@+id/cbEvening"
-            android:text="Evening"
+            android:text="@string/evening"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -92,11 +89,11 @@
             android:layout_width="138dp"
             android:layout_height="57dp"
             android:checked="true"
-            android:text="Active" />
+            android:text="@string/active" />
 
         <Button
             android:id="@+id/btnSaveDrug"
-            android:text="Save Drug"
+            android:text="@string/save_drug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"/>

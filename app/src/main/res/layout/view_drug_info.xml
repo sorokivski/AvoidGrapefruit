@@ -30,7 +30,7 @@
             layout="@layout/expandable_section" />
 
         <TextView
-            android:text="Tags"
+            android:text="@string/tags"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:lineSpacing="8dp"/>
 
         <TextView
-            android:text="Brand Names"
+            android:text="@string/brand_names"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             app:lineSpacing="8dp"/>
 
         <TextView
-            android:text="Synonyms"
+            android:text="@string/synonyms"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

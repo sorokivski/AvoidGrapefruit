@@ -2,14 +2,14 @@
 <resources>
     <color name="grapefruit_red">#FF6F61</color>
     <color name="grapefruit_orange">#FFA07A</color>
-    <color name="milk_white">#DDDBD7D7</color>
+    <color name="milk_white">#F1EDEB</color>
     <color name="dark_grey">#35261E</color>
     <color name="text_grey">#BBBBBB</color>
     <color name="accent_green">#507E5F</color>
     <color name="wood_brown">#824E22</color>
     <color name="citrus_yellow">#B3730A</color>
     <color name="lime_peel">#8FC772</color>
-    <color name="white">#CBB9A8</color>
+    <color name="white">#F1EDEB</color>
     <color name="black">#1E1B16</color>
-    <color name="gray">#EB5F4E4E</color>
+    <color name="gray">#574848</color>
 </resources>

@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +24,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Drug Name"
+            android:hint="@string/drug_name"
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -41,7 +38,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Dosage">
+            android:hint="@string/dosage">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDosage"
@@ -56,7 +53,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Amount per day">
+            android:hint="@string/amount_per_day">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etAmountPerDay"
@@ -70,7 +67,7 @@
             android:id="@+id/tvStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Date: "
+            android:text="@string/start_date"
             android:padding="8dp"/>
 
         <!-- End Date -->
@@ -78,7 +75,7 @@
             android:id="@+id/tvEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="End Date: "
+            android:text="@string/end_date"
             android:padding="8dp"/>
 
         <!-- Intake Times -->
@@ -91,7 +88,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipMorning"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:text="Morning"
+                android:text="@string/morning"
                 android:checkable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -99,7 +96,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipAfternoon"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:text="Afternoon"
+                android:text="@string/afternoon"
                 android:checkable="true"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content" />
@@ -107,7 +104,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipEvening"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:text="Evening"
+                android:text="@string/evening"
                 android:checkable="true"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content" />
@@ -118,7 +115,7 @@
             android:id="@+id/checkActive"
             android:layout_width="108dp"
             android:layout_height="wrap_content"
-            android:text="Active" />
+            android:text="@string/active" />
 
         <!-- Save button -->
         <Button
@@ -126,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Save"/>
+            android:text="@string/save"/>
     </LinearLayout>
 </ScrollView>
     <ImageButton
@@ -136,7 +133,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="Go Back"
+        android:contentDescription="@string/back"
         android:src="@drawable/ic_arrow_back"
         android:elevation="8dp"
         android:padding="10dp" />
