@@ -23,7 +23,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="8dp"
-            android:text="Drug Name"
+            android:text="@string/drug_name"
             android:textColor="@color/grapefruit_red"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -37,7 +37,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="12dp"
             android:layout_marginTop="6dp"
-            android:text="50mg - 2x/day"
+            android:text="@string/dosage"
             android:textColor="@color/text_grey"
             android:textSize="14sp" />
 
@@ -50,7 +50,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
-            android:text="08:00, 20:00"
+            android:text="@string/intake_time"
             android:textColor="@color/accent_green"
             android:textSize="12sp" />
 

@@ -18,7 +18,7 @@
             android:id="@+id/item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Item Title"
+            android:text="@string/item_title"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#222222" />
@@ -28,7 +28,7 @@
             android:id="@+id/item_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category"
+            android:text="@string/category"
             android:textSize="14sp"
             android:textColor="#666666"
             android:layout_marginTop="4dp" />
@@ -38,7 +38,7 @@
             android:id="@+id/item_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description goes here"
+            android:text="@string/description"
             android:textSize="14sp"
             android:textColor="#444444"
             android:layout_marginTop="8dp" />
